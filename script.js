@@ -78,7 +78,23 @@ const productos = [
 let categoriaActiva = "";
 let textoBusqueda = "";
 
+const seccionDetalle = document.querySelector("#detalle-producto");
+const contenidoDetalle = document.querySelector("#contenido-detalle");
+const botonVolver = document.querySelector("#volver-productos");
 
+
+// Genera la URL amigable de cada producto.
+function crearSlug(nombre) {
+    return nombre
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+
+// Muestra las sugerencias del buscador.
 function mostrarResultadosBusqueda() {
     const texto = campoBusqueda.value.trim().toLowerCase();
 
@@ -136,11 +152,7 @@ function mostrarResultadosBusqueda() {
                 campoBusqueda.value = producto.nombre;
                 textoBusqueda = producto.nombre.toLowerCase();
                 resultadosBusqueda.hidden = true;
-                mostrarProductos();
-
-                document.querySelector("#destacados").scrollIntoView({
-                    behavior: "smooth"
-                });
+                abrirDetalleProducto(producto.id);
             });
 
             resultadosBusqueda.appendChild(boton);
@@ -151,6 +163,7 @@ function mostrarResultadosBusqueda() {
 }
 
 
+// Muestra los productos de la tienda.
 function mostrarProductos() {
     const resultados = productos.filter(function (producto) {
         const coincideTexto =
@@ -179,10 +192,23 @@ function mostrarProductos() {
         const tarjeta = document.createElement("article");
         tarjeta.className = "producto";
         tarjeta.style.cursor = "pointer";
-        
+        tarjeta.setAttribute("role", "button");
+        tarjeta.setAttribute("tabindex", "0");
+        tarjeta.setAttribute(
+            "aria-label",
+            "Ver detalles de " + producto.nombre
+        );
+
         tarjeta.addEventListener("click", function () {
             abrirDetalleProducto(producto.id);
-});
+        });
+
+        tarjeta.addEventListener("keydown", function (evento) {
+            if (evento.key === "Enter" || evento.key === " ") {
+                evento.preventDefault();
+                abrirDetalleProducto(producto.id);
+            }
+        });
 
         const imagen = document.createElement("div");
         imagen.className = "producto-icono";
@@ -214,10 +240,7 @@ function mostrarProductos() {
 }
 
 
-const seccionDetalle = document.querySelector("#detalle-producto");
-const contenidoDetalle = document.querySelector("#contenido-detalle");
-const botonVolver = document.querySelector("#volver-productos");
-
+// Abre el detalle de un producto y actualiza su URL.
 function abrirDetalleProducto(id) {
     const producto = productos.find(function (item) {
         return item.id === id;
@@ -225,31 +248,20 @@ function abrirDetalleProducto(id) {
 
     if (!producto) return;
 
-history.pushState(
-    { productoId: producto.id },
-    "",
-    "?producto=" + slug
-);
-    
+    const slug = crearSlug(producto.nombre);
+    const parametros = new URLSearchParams(window.location.search);
 
-if (!window.location.search.includes("producto=")) {
-    
-const slug = producto.nombre
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+    if (parametros.get("producto") !== slug) {
+        parametros.set("producto", slug);
 
-if (new URLSearchParams(window.location.search).get("producto") !== slug) {
-    history.pushState(
-        { productoId: producto.id },
-        "",
-        "?producto=" + slug
-    );
-}
+        history.pushState(
+            { productoId: producto.id },
+            "",
+            window.location.pathname + "?" + parametros.toString()
+        );
+    }
 
-
+    resultadosBusqueda.hidden = true;
 
     contenidoDetalle.innerHTML = "";
 
@@ -287,28 +299,67 @@ if (new URLSearchParams(window.location.search).get("producto") !== slug) {
     seccionDetalle.scrollIntoView({ behavior: "smooth" });
 }
 
-botonVolver.addEventListener("click", function () {
+
+// Vuelve al catálogo y quita el producto de la URL.
+function volverAProductos(actualizarURL = true) {
     seccionDetalle.hidden = true;
     document.querySelector("#destacados").hidden = false;
+
+    if (actualizarURL && window.location.search.includes("producto=")) {
+        const parametros = new URLSearchParams(window.location.search);
+        parametros.delete("producto");
+
+        const nuevaURL =
+            window.location.pathname +
+            (parametros.toString() ? "?" + parametros.toString() : "") +
+            window.location.hash;
+
+        history.pushState({}, "", nuevaURL);
+    }
 
     document.querySelector("#destacados").scrollIntoView({
         behavior: "smooth"
     });
+}
+
+
+botonVolver.addEventListener("click", function () {
+    volverAProductos();
 });
 
 
+// Permite buscar productos mediante el formulario.
 formularioBusqueda.addEventListener("submit", function (evento) {
     evento.preventDefault();
-    textoBusqueda = campoBusqueda.value.trim().toLowerCase();
-    mostrarProductos();
-});
 
-campoBusqueda.addEventListener("input", function () {
     textoBusqueda = campoBusqueda.value.trim().toLowerCase();
+
     mostrarProductos();
     mostrarResultadosBusqueda();
 });
 
+
+// Actualiza los productos mientras se escribe.
+campoBusqueda.addEventListener("input", function () {
+    textoBusqueda = campoBusqueda.value.trim().toLowerCase();
+
+    mostrarProductos();
+    mostrarResultadosBusqueda();
+});
+
+
+// Cierra las sugerencias cuando se hace clic fuera del buscador.
+document.addEventListener("click", function (evento) {
+    if (
+        contenedorBuscador &&
+        !contenedorBuscador.contains(evento.target)
+    ) {
+        resultadosBusqueda.hidden = true;
+    }
+});
+
+
+// Activa o desactiva las categorías.
 botonesCategorias.forEach(function (boton) {
     boton.addEventListener("click", function () {
         const categoriaSeleccionada = boton.dataset.categoria;
@@ -334,28 +385,37 @@ botonesCategorias.forEach(function (boton) {
     });
 });
 
-mostrarProductos();
 
+// Abre el producto indicado en la URL al cargar o navegar.
 function cargarProductoDesdeURL() {
     const parametros = new URLSearchParams(window.location.search);
     const slugURL = parametros.get("producto");
 
-    if (!slugURL) return;
+    if (!slugURL) {
+        seccionDetalle.hidden = true;
+        document.querySelector("#destacados").hidden = false;
+        return;
+    }
 
     const producto = productos.find(function (item) {
-        const slug = item.nombre
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-|-$/g, "");
-
-        return slug === slugURL;
+        return crearSlug(item.nombre) === slugURL;
     });
 
     if (producto) {
         abrirDetalleProducto(producto.id);
+    } else {
+        seccionDetalle.hidden = true;
+        document.querySelector("#destacados").hidden = false;
     }
 }
 
+
+// Detecta los botones atrás y adelante del navegador.
+window.addEventListener("popstate", function () {
+    cargarProductoDesdeURL();
+});
+
+
+// Inicia la tienda.
+mostrarProductos();
 cargarProductoDesdeURL();
