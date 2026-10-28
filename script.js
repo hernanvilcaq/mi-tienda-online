@@ -238,7 +238,6 @@ function mostrarProductos() {
     });
 }
 
-
 // Abre el detalle de un producto y actualiza su URL.
 function abrirDetalleProducto(id) {
     const producto = productos.find(function (item) {
