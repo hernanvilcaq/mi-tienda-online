@@ -79,6 +79,7 @@ let categoriaActiva = "";
 let textoBusqueda = "";
 let carrito = [];
 
+
 function agregarAlCarrito(id) {
     const producto = productos.find(function (item) {
         return item.id === id;
@@ -101,13 +102,50 @@ function agregarAlCarrito(id) {
         });
     }
 
-    alert(producto.nombre + " se agregó al carrito.");
+    mostrarCarrito();
 }
 
+function mostrarCarrito() {
+    const contenidoCarrito = document.getElementById("contenido-carrito");
+    const totalCarrito = document.getElementById("total-carrito");
 
-const seccionDetalle = document.querySelector("#detalle-producto");
-const contenidoDetalle = document.querySelector("#contenido-detalle");
-const botonVolver = document.querySelector("#volver-productos");
+    if (!contenidoCarrito || !totalCarrito) return;
+
+    contenidoCarrito.innerHTML = "";
+
+    if (carrito.length === 0) {
+        contenidoCarrito.innerHTML = "<p>Tu carrito está vacío.</p>";
+        totalCarrito.textContent = "Total: S/ 0.00";
+        return;
+    }
+
+    let total = 0;
+
+    carrito.forEach(function (item) {
+        const fila = document.createElement("div");
+        fila.className = "item-carrito";
+
+        const nombre = document.createElement("p");
+        nombre.textContent = item.nombre;
+
+        const precio = document.createElement("p");
+        precio.textContent = "Precio: S/ " + item.precio.toFixed(2);
+
+        const cantidad = document.createElement("p");
+        cantidad.textContent = "Cantidad: " + item.cantidad;
+
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        const importe = document.createElement("p");
+        importe.textContent = "Subtotal: S/ " + subtotal.toFixed(2);
+
+        fila.append(nombre, precio, cantidad, importe);
+        contenidoCarrito.appendChild(fila);
+    });
+
+    totalCarrito.textContent = "Total: S/ " + total.toFixed(2);
+}
 
 
 // Genera la URL amigable de cada producto.
