@@ -79,7 +79,7 @@ const productos = [
 
 let categoriaActiva = "";
 let textoBusqueda = "";
-let carrito = JSON.parse(localStorage.getItem("orvelis_carrito")) || [];
+let carrito = JSON.parse(localStorage.getItem("orvelis_carrito") || "[]");
 
 
 function agregarAlCarrito(id) {
@@ -114,9 +114,9 @@ function mostrarCarrito() {
 
     if (!contenidoCarrito || !totalCarrito) return;
 
-    contenidoCarrito.innerHTML = "";
-    localStorage.setItem("orvelis_carrito", JSON.stringify(carrito));
-    let total = 0;
+   contenidoCarrito.innerHTML = "";
+localStorage.setItem("orvelis_carrito", JSON.stringify(carrito));
+let total = 0;
 
     if (carrito.length === 0) {
         contenidoCarrito.textContent = "Tu carrito está vacío.";
