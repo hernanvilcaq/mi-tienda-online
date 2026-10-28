@@ -337,9 +337,7 @@ function cargarProductoDesdeURL() {
     const parametros = new URLSearchParams(window.location.search);
     const slugURL = parametros.get("producto");
 
-    if (!slugURL) {
-        return;
-    }
+    if (!slugURL) return;
 
     const producto = productos.find(function (item) {
         const slug = item.nombre
