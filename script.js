@@ -1,4 +1,3 @@
-
 const formularioBusqueda = document.querySelector("#formulario-busqueda");
 const campoBusqueda = document.querySelector("#busqueda");
 const botonesCategorias = document.querySelectorAll(".categoria");
