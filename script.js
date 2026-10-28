@@ -224,6 +224,12 @@ function abrirDetalleProducto(id) {
     });
 
     if (!producto) return;
+
+history.pushState(
+    { productoId: producto.id },
+    "",
+    "?producto=" + slug
+);
     
 const slug = producto.nombre
     .toLowerCase()
