@@ -382,3 +382,49 @@ main {
         display: none;
     }
 }
+
+/* Tarjetas del catálogo */
+.producto-icono {
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #DDF5F7, #EAF2FA);
+    font-size: 4rem;
+}
+
+.producto-contenido {
+    padding: 16px;
+}
+
+.producto-categoria {
+    color: var(--turquesa);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.producto-contenido h3 {
+    margin: 6px 0;
+    font-size: 1.05rem;
+}
+
+.producto-descripcion {
+    color: #607987;
+    font-size: 0.9rem;
+    min-height: 46px;
+}
+
+.producto-precio {
+    margin-top: 12px;
+    color: var(--azul-oceano);
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.categoria.activa {
+    border-color: var(--turquesa);
+    background: #CDEEF2;
+    box-shadow: 0 0 0 2px rgba(22, 138, 173, 0.15);
+}
+0000
