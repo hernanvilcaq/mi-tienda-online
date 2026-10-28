@@ -11,14 +11,17 @@ const botonVolver = document.querySelector("#volver-productos");
 // Productos temporales para probar la tienda.
 // Después los cargaremos desde Supabase.
 const productos = [
-    {
-        id: 1,
-        nombre: "Auriculares inalámbricos",
-        categoria: "Tecnología",
-        precio: 79.90,
-        descripcion: "Sonido para tu música y tus actividades.",
-        icono: "🎧"
-    },
+    
+{
+    id: 1,
+    nombre: "Auriculares inalámbricos",
+    categoria: "Tecnología",
+    precio: 79.90,
+    descripcion: "Sonido para tu música y tus actividades.",
+    icono: "🎧",
+    imagen: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+},
+
     {
         id: 2,
         nombre: "Reloj digital",
