@@ -5,6 +5,7 @@ const listaProductos = document.querySelector("#lista-productos");
 const resultadosBusqueda = document.querySelector("#resultados-busqueda");
 const contenedorBuscador = document.querySelector(".buscador-contenedor");
 
+
 // Productos temporales para probar la tienda.
 // Después los cargaremos desde Supabase.
 const productos = [
@@ -76,6 +77,33 @@ const productos = [
 
 let categoriaActiva = "";
 let textoBusqueda = "";
+let carrito = [];
+
+function agregarAlCarrito(id) {
+    const producto = productos.find(function (item) {
+        return item.id === id;
+    });
+
+    if (!producto) return;
+
+    const existente = carrito.find(function (item) {
+        return item.id === id;
+    });
+
+    if (existente) {
+        existente.cantidad++;
+    } else {
+        carrito.push({
+            id: producto.id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: 1
+        });
+    }
+
+    alert(producto.nombre + " se agregó al carrito.");
+}
+
 
 const seccionDetalle = document.querySelector("#detalle-producto");
 const contenidoDetalle = document.querySelector("#contenido-detalle");
@@ -287,9 +315,21 @@ function abrirDetalleProducto(id) {
     precio.className = "producto-precio";
     precio.textContent = "S/ " + producto.precio.toFixed(2);
 
-    informacion.append(categoria, nombre, descripcion, precio);
+    
+    const botonCarrito = document.createElement("button");
+    botonCarrito.type = "button";
+    botonCarrito.className = "boton-principal";
+    botonCarrito.textContent = "🛒 Agregar al carrito";
+
+    botonCarrito.addEventListener("click", function (evento) {
+        evento.stopPropagation();
+        agregarAlCarrito(producto.id);
+    });
+
+    informacion.append(categoria, nombre, descripcion, precio, botonCarrito);
     tarjeta.append(imagen, informacion);
     contenidoDetalle.appendChild(tarjeta);
+
 
     document.querySelector("#destacados").hidden = true;
     seccionDetalle.hidden = false;
