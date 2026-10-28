@@ -218,7 +218,6 @@ campoBusqueda.addEventListener("input", function () {
     textoBusqueda = campoBusqueda.value.trim().toLowerCase();
     mostrarProductos();
     mostrarResultadosBusqueda();
-    resultadosBusqueda.hidden = true;
 });
 
 botonesCategorias.forEach(function (boton) {
