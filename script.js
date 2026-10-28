@@ -178,6 +178,11 @@ function mostrarProductos() {
     resultados.forEach(function (producto) {
         const tarjeta = document.createElement("article");
         tarjeta.className = "producto";
+        tarjeta.style.cursor = "pointer";
+        
+        tarjeta.addEventListener("click", function () {
+            abrirDetalleProducto(producto.id);
+});
 
         const imagen = document.createElement("div");
         imagen.className = "producto-icono";
@@ -207,6 +212,64 @@ function mostrarProductos() {
         listaProductos.appendChild(tarjeta);
     });
 }
+
+
+const seccionDetalle = document.querySelector("#detalle-producto");
+const contenidoDetalle = document.querySelector("#contenido-detalle");
+const botonVolver = document.querySelector("#volver-productos");
+
+function abrirDetalleProducto(id) {
+    const producto = productos.find(function (item) {
+        return item.id === id;
+    });
+
+    if (!producto) return;
+
+    contenidoDetalle.innerHTML = "";
+
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "detalle-tarjeta";
+
+    const imagen = document.createElement("div");
+    imagen.className = "detalle-imagen";
+    imagen.textContent = producto.icono;
+
+    const informacion = document.createElement("div");
+    informacion.className = "detalle-informacion";
+
+    const categoria = document.createElement("p");
+    categoria.className = "producto-categoria";
+    categoria.textContent = producto.categoria;
+
+    const nombre = document.createElement("h2");
+    nombre.textContent = producto.nombre;
+
+    const descripcion = document.createElement("p");
+    descripcion.textContent = producto.descripcion;
+
+    const precio = document.createElement("p");
+    precio.className = "producto-precio";
+    precio.textContent = "S/ " + producto.precio.toFixed(2);
+
+    informacion.append(categoria, nombre, descripcion, precio);
+    tarjeta.append(imagen, informacion);
+    contenidoDetalle.appendChild(tarjeta);
+
+    document.querySelector("#destacados").hidden = true;
+    seccionDetalle.hidden = false;
+
+    seccionDetalle.scrollIntoView({ behavior: "smooth" });
+}
+
+botonVolver.addEventListener("click", function () {
+    seccionDetalle.hidden = true;
+    document.querySelector("#destacados").hidden = false;
+
+    document.querySelector("#destacados").scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
 
 formularioBusqueda.addEventListener("submit", function (evento) {
     evento.preventDefault();
