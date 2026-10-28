@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,14 +9,94 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Mi Tienda Online</h1>
-        <p>Estamos preparando algo especial.</p>
+    <header class="encabezado">
+        <div class="barra-superior">
+            <a href="index.html" class="logo">
+                <span class="logo-icono">M</span>
+                <span>Mi Tienda</span>
+            </a>
+
+            <form class="buscador" id="formulario-busqueda">
+                <input
+                    type="search"
+                    id="busqueda"
+                    placeholder="¿Qué estás buscando?"
+                    aria-label="Buscar productos"
+                >
+                <button type="submit" aria-label="Buscar">⌕</button>
+            </form>
+
+            <button class="boton-carrito" id="boton-carrito" type="button">
+                🛒 <span>Carrito</span>
+                <span id="contador-carrito">0</span>
+            </button>
+        </div>
+
+        <nav class="navegacion" aria-label="Navegación principal">
+            <a href="#inicio">Inicio</a>
+            <a href="#categorias">Categorías</a>
+            <a href="#destacados">Productos destacados</a>
+        </nav>
     </header>
 
     <main>
-        <h2>Próximamente</h2>
-        <p>Nuestra tienda estará disponible pronto.</p>
+        <section class="bienvenida" id="inicio">
+            <p class="etiqueta">DESCUBRE ALGO NUEVO</p>
+            <h1>Encuentra lo que buscas.</h1>
+            <p>
+                Tecnología, moda y accesorios en un solo lugar.
+                Explora nuestra colección.
+            </p>
+            <a href="#categorias" class="boton-principal">
+                Explorar productos
+            </a>
+        </section>
+
+        <section id="categorias" class="seccion">
+            <h2>Explora por categorías</h2>
+            <p class="descripcion-seccion">
+                Encuentra fácilmente lo que necesitas.
+            </p>
+
+            <div class="lista-categorias">
+                <button class="categoria" data-categoria="Tecnología">
+                    <span>⌘</span>
+                    <strong>Tecnología</strong>
+                </button>
+
+                <button class="categoria" data-categoria="Ropa">
+                    <span>♧</span>
+                    <strong>Ropa</strong>
+                </button>
+
+                <button class="categoria" data-categoria="Calzado">
+                    <span>◈</span>
+                    <strong>Calzado</strong>
+                </button>
+
+                <button class="categoria" data-categoria="Accesorios">
+                    <span>✧</span>
+                    <strong>Accesorios</strong>
+                </button>
+            </div>
+        </section>
+
+        <section id="destacados" class="seccion">
+            <h2>Productos destacados</h2>
+            <p class="descripcion-seccion">
+                Pronto encontrarás aquí nuestros productos.
+            </p>
+
+            <div id="lista-productos" class="lista-productos">
+                <p class="mensaje-vacio">
+                    Estamos preparando el catálogo.
+                </p>
+            </div>
+        </section>
     </main>
+
+    <footer class="pie-pagina">
+        <p>Mi Tienda Online · Nuevos productos, nuevas posibilidades.</p>
+    </footer>
 </body>
 </html>
