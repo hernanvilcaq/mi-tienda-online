@@ -107,6 +107,7 @@ function agregarAlCarrito(id) {
     mostrarCarrito();
 }
 
+
 function mostrarCarrito() {
     const contenidoCarrito = document.getElementById("contenido-carrito");
     const totalCarrito = document.getElementById("total-carrito");
@@ -114,20 +115,19 @@ function mostrarCarrito() {
     if (!contenidoCarrito || !totalCarrito) return;
 
     contenidoCarrito.innerHTML = "";
+    let total = 0;
 
     if (carrito.length === 0) {
-        contenidoCarrito.innerHTML = "<p>Tu carrito está vacío.</p>";
+        contenidoCarrito.textContent = "Tu carrito está vacío.";
         totalCarrito.textContent = "Total: S/ 0.00";
         return;
     }
-
-    let total = 0;
 
     carrito.forEach(function (item) {
         const fila = document.createElement("div");
         fila.className = "item-carrito";
 
-        const nombre = document.createElement("p");
+        const nombre = document.createElement("h3");
         nombre.textContent = item.nombre;
 
         const precio = document.createElement("p");
@@ -142,11 +142,64 @@ function mostrarCarrito() {
         const importe = document.createElement("p");
         importe.textContent = "Subtotal: S/ " + subtotal.toFixed(2);
 
-        fila.append(nombre, precio, cantidad, importe);
+        const disminuir = document.createElement("button");
+        disminuir.type = "button";
+        disminuir.textContent = "−";
+        disminuir.setAttribute("aria-label", "Disminuir cantidad");
+        disminuir.addEventListener("click", function () {
+            cambiarCantidad(item.id, -1);
+        });
+
+        const aumentar = document.createElement("button");
+        aumentar.type = "button";
+        aumentar.textContent = "+";
+        aumentar.setAttribute("aria-label", "Aumentar cantidad");
+        aumentar.addEventListener("click", function () {
+            cambiarCantidad(item.id, 1);
+        });
+
+        const eliminar = document.createElement("button");
+        eliminar.type = "button";
+        eliminar.textContent = "🗑️ Eliminar";
+        eliminar.addEventListener("click", function () {
+            carrito = carrito.filter(function (producto) {
+                return producto.id !== item.id;
+            });
+            mostrarCarrito();
+        });
+
+        fila.append(
+            nombre,
+            precio,
+            cantidad,
+            disminuir,
+            aumentar,
+            importe,
+            eliminar
+        );
+
         contenidoCarrito.appendChild(fila);
     });
 
     totalCarrito.textContent = "Total: S/ " + total.toFixed(2);
+}
+
+function cambiarCantidad(id, cambio) {
+    const producto = carrito.find(function (item) {
+        return item.id === id;
+    });
+
+    if (!producto) return;
+
+    producto.cantidad += cambio;
+
+    if (producto.cantidad <= 0) {
+        carrito = carrito.filter(function (item) {
+            return item.id !== id;
+        });
+    }
+
+    mostrarCarrito();
 }
 
 
