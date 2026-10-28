@@ -450,3 +450,97 @@ main {
     font-size: 1.3rem;
     letter-spacing: 2px;
 }
+
+/* Panel de resultados del buscador ORVÉLIS */
+.buscador-contenedor {
+    position: relative;
+    flex: 1;
+    max-width: 540px;
+    min-width: 0;
+}
+
+.buscador-contenedor .buscador {
+    width: 100%;
+    max-width: none;
+}
+
+.resultados-busqueda[hidden] {
+    display: none;
+}
+
+.resultados-busqueda {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    max-height: 360px;
+    overflow-y: auto;
+    background: #FFFFFF;
+    border: 1px solid #D4E9EE;
+    border-radius: 14px;
+    box-shadow: 0 14px 35px rgba(16, 45, 70, 0.18);
+}
+
+.resultado-busqueda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 15px;
+    background: #FFFFFF;
+    color: var(--texto);
+    text-align: left;
+    border-bottom: 1px solid #E7F0F3;
+}
+
+.resultado-busqueda:last-child {
+    border-bottom: none;
+}
+
+.resultado-busqueda:hover {
+    background: #F0FAFB;
+}
+
+.resultado-miniatura {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #DDF5F7, #EAF2FA);
+    font-size: 1.6rem;
+}
+
+.resultado-informacion {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.resultado-nombre {
+    font-weight: 700;
+    color: var(--azul-oceano);
+}
+
+.resultado-detalle {
+    font-size: 0.85rem;
+    color: #607987;
+}
+
+.resultado-precio {
+    margin-left: auto;
+    padding-left: 8px;
+    color: var(--azul-secundario);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .buscador-contenedor {
+        order: 3;
+        flex-basis: 100%;
+        max-width: none;
+    }
+}
