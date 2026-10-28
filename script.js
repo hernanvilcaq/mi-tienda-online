@@ -3,6 +3,8 @@ const formularioBusqueda = document.querySelector("#formulario-busqueda");
 const campoBusqueda = document.querySelector("#busqueda");
 const botonesCategorias = document.querySelectorAll(".categoria");
 const listaProductos = document.querySelector("#lista-productos");
+const resultadosBusqueda = document.querySelector("#resultados-busqueda");
+const contenedorBuscador = document.querySelector(".buscador-contenedor");
 
 // Productos temporales para probar la tienda.
 // Después los cargaremos desde Supabase.
@@ -76,6 +78,79 @@ const productos = [
 let categoriaActiva = "";
 let textoBusqueda = "";
 
+
+function mostrarResultadosBusqueda() {
+    const texto = campoBusqueda.value.trim().toLowerCase();
+
+    resultadosBusqueda.innerHTML = "";
+
+    if (texto === "") {
+        resultadosBusqueda.hidden = true;
+        return;
+    }
+
+    const coincidencias = productos.filter(function (producto) {
+        return (
+            producto.nombre.toLowerCase().includes(texto) ||
+            producto.descripcion.toLowerCase().includes(texto) ||
+            producto.categoria.toLowerCase().includes(texto)
+        );
+    });
+
+    if (coincidencias.length === 0) {
+        const mensaje = document.createElement("p");
+        mensaje.className = "resultado-detalle";
+        mensaje.style.padding = "16px";
+        mensaje.textContent = "No encontramos productos con ese nombre.";
+        resultadosBusqueda.appendChild(mensaje);
+    } else {
+        coincidencias.slice(0, 6).forEach(function (producto) {
+            const boton = document.createElement("button");
+            boton.type = "button";
+            boton.className = "resultado-busqueda";
+
+            const miniatura = document.createElement("span");
+            miniatura.className = "resultado-miniatura";
+            miniatura.textContent = producto.icono;
+            miniatura.setAttribute("aria-hidden", "true");
+
+            const informacion = document.createElement("span");
+            informacion.className = "resultado-informacion";
+
+            const nombre = document.createElement("span");
+            nombre.className = "resultado-nombre";
+            nombre.textContent = producto.nombre;
+
+            const detalle = document.createElement("span");
+            detalle.className = "resultado-detalle";
+            detalle.textContent = producto.categoria;
+
+            const precio = document.createElement("span");
+            precio.className = "resultado-precio";
+            precio.textContent = "S/ " + producto.precio.toFixed(2);
+
+            informacion.append(nombre, detalle);
+            boton.append(miniatura, informacion, precio);
+
+            boton.addEventListener("click", function () {
+                campoBusqueda.value = producto.nombre;
+                textoBusqueda = producto.nombre.toLowerCase();
+                resultadosBusqueda.hidden = true;
+                mostrarProductos();
+
+                document.querySelector("#destacados").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+
+            resultadosBusqueda.appendChild(boton);
+        });
+    }
+
+    resultadosBusqueda.hidden = false;
+}
+
+
 function mostrarProductos() {
     const resultados = productos.filter(function (producto) {
         const coincideTexto =
@@ -142,6 +217,8 @@ formularioBusqueda.addEventListener("submit", function (evento) {
 campoBusqueda.addEventListener("input", function () {
     textoBusqueda = campoBusqueda.value.trim().toLowerCase();
     mostrarProductos();
+    mostrarResultadosBusqueda();
+    resultadosBusqueda.hidden = true;
 });
 
 botonesCategorias.forEach(function (boton) {
