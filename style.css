@@ -25,9 +25,173 @@ body {
 }
 
 /* 3. Encabezados */
-h1, h2, h3 {
-    color: var(--azul-oceano);
+
+/* ===== ENCABEZADO PREMIUM ORVÉLIS ===== */
+
+.encabezado {
+    background: #ffffff;
+    border-bottom: 1px solid #e8e8ed;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
+
+.barra-superior {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo-icono {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #172554;
+    color: #ffffff;
+    border-radius: 12px;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.logo-texto {
+    color: #172033;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.buscador-contenedor {
+    flex: 1;
+    max-width: 520px;
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    background: #f5f6fa;
+    border: 1px solid #e4e7ee;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.buscador input {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+}
+
+.buscador button {
+    padding: 10px 17px;
+    border: none;
+    background: transparent;
+    color: #172554;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.boton-carrito {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #172554;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#contador-carrito {
+    min-width: 23px;
+    height: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #172554;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.navegacion {
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    padding: 14px 20px;
+    border-top: 1px solid #f0f0f3;
+}
+
+.navegacion a {
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.navegacion a:hover {
+    color: #172554;
+}
+
+@media (max-width: 650px) {
+    .barra-superior {
+        padding: 14px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .logo-icono {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    .logo-texto {
+        font-size: 19px;
+        letter-spacing: 1px;
+    }
+
+    .boton-carrito {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .buscador-contenedor {
+        order: 3;
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    .navegacion {
+        gap: 20px;
+        padding: 13px 8px;
+    }
+
+    .navegacion a {
+        font-size: 12px;
+    }
+}
+
 
 /* 4. Enlaces y botones */
 a {
