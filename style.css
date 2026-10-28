@@ -428,3 +428,25 @@ main {
     box-shadow: 0 0 0 2px rgba(22, 138, 173, 0.15);
 }
 0000
+/* Identidad visual de ORVÉLIS */
+.logo {
+    gap: 12px;
+    letter-spacing: 1px;
+}
+
+.logo-icono {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--turquesa-claro);
+    border-radius: 50%;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: normal;
+    box-shadow: 0 0 14px rgba(87, 199, 212, 0.18);
+}
+
+.logo-texto {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+}
