@@ -231,18 +231,22 @@ history.pushState(
     "?producto=" + slug
 );
     
-const slug = producto.nombre
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
 
-history.pushState(
-    { productoId: producto.id },
-    "",
-    "?producto=" + slug
-);
+if (!window.location.search.includes("producto=")) {
+    const slug = producto.nombre
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+    history.pushState(
+        { productoId: producto.id },
+        "",
+        "?producto=" + slug
+    );
+}
+
 
     contenidoDetalle.innerHTML = "";
 
