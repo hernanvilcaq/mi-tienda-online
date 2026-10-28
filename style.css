@@ -895,3 +895,72 @@ main {
     }
 }
 
+
+/* ===== PORTADA ORVÉLIS ===== */
+
+.bienvenida {
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 80px 55px;
+    border-radius: 24px;
+    background: linear-gradient(120deg, #101a35, #243b70);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.bienvenida .etiqueta {
+    color: #c5d3ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.bienvenida h1 {
+    max-width: 650px;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.1;
+    margin: 0 0 20px;
+    letter-spacing: -1.5px;
+}
+
+.bienvenida > p:not(.etiqueta) {
+    max-width: 520px;
+    color: #e0e7ff;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.bienvenida .boton-principal {
+    display: inline-block;
+    padding: 15px 24px;
+    background: #ffffff;
+    color: #172554;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.bienvenida .boton-principal:hover {
+    transform: translateY(-3px);
+    background: #e8edff;
+}
+
+@media (max-width: 650px) {
+    .bienvenida {
+        margin: 18px 14px;
+        padding: 48px 25px;
+        border-radius: 18px;
+    }
+
+    .bienvenida h1 {
+        font-size: 37px;
+    }
+
+    .bienvenida > p:not(.etiqueta) {
+        font-size: 15px;
+    }
+}
