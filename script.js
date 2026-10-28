@@ -328,3 +328,29 @@ botonesCategorias.forEach(function (boton) {
 });
 
 mostrarProductos();
+
+function cargarProductoDesdeURL() {
+    const parametros = new URLSearchParams(window.location.search);
+    const slugURL = parametros.get("producto");
+
+    if (!slugURL) {
+        return;
+    }
+
+    const producto = productos.find(function (item) {
+        const slug = item.nombre
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+
+        return slug === slugURL;
+    });
+
+    if (producto) {
+        abrirDetalleProducto(producto.id);
+    }
+}
+
+cargarProductoDesdeURL();
