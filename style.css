@@ -592,3 +592,58 @@ main {
         min-height: 200px;
     }
 }
+
+/* Mejoras visuales del carrito ORVÉLIS */
+.item-carrito {
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid #d8d8d8;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.item-carrito h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.item-carrito p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+/* Botones de aumentar y disminuir */
+.item-carrito button {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 10px 16px;
+    margin: 6px 8px 6px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #172554;
+    color: white;
+}
+
+/* Efecto al pasar el cursor */
+.item-carrito button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+/* Botón eliminar */
+.item-carrito button:last-child {
+    background: #b91c1c;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
+/* Total del carrito */
+#total-carrito {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
