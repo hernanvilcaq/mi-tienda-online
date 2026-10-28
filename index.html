@@ -16,15 +16,24 @@
                 <span class="logo-texto">ORVÉLIS</span>
             </a>
 
-            <form class="buscador" id="formulario-busqueda">
-                <input
-                    type="search"
-                    id="busqueda"
-                    placeholder="¿Qué estás buscando?"
-                    aria-label="Buscar productos"
-                >
-                <button type="submit" aria-label="Buscar">⌕</button>
-            </form>
+<div class="buscador-contenedor">
+    <form class="buscador" id="formulario-busqueda">
+        <input
+            type="search"
+            id="busqueda"
+            placeholder="¿Qué estás buscando?"
+            aria-label="Buscar productos"
+            autocomplete="off"
+        >
+        <button type="submit" aria-label="Buscar">⌕</button>
+    </form>
+
+    <div
+        id="resultados-busqueda"
+        class="resultados-busqueda"
+        hidden
+    ></div>
+</div>
 
             <button class="boton-carrito" id="boton-carrito" type="button">
                 🛒 <span>Carrito</span>
