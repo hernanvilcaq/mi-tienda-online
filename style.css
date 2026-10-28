@@ -964,3 +964,90 @@ main {
         font-size: 15px;
     }
 }
+
+/* ===== CATEGORÍAS ORVÉLIS ===== */
+
+#categorias {
+    max-width: 1200px;
+    margin: 65px auto;
+    padding: 0 24px;
+}
+
+#categorias h2,
+#destacados h2 {
+    color: #172033;
+    font-size: clamp(25px, 3vw, 32px);
+    letter-spacing: -0.7px;
+    margin-bottom: 10px;
+}
+
+.descripcion-seccion {
+    color: #737b8c;
+    font-size: 15px;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.lista-categorias {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.categoria {
+    min-height: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e6e8ef;
+    border-radius: 18px;
+    color: #172033;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.categoria span {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #243b70;
+    border-radius: 13px;
+    font-size: 25px;
+}
+
+.categoria strong {
+    font-size: 16px;
+}
+
+.categoria:hover {
+    transform: translateY(-4px);
+    border-color: #aab9e7;
+    box-shadow: 0 10px 25px rgba(23, 37, 84, 0.08);
+}
+
+@media (max-width: 700px) {
+    .lista-categorias {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .categoria {
+        min-height: 120px;
+        padding: 18px;
+    }
+
+    #categorias {
+        margin: 42px auto;
+        padding: 0 14px;
+    }
+}
+
