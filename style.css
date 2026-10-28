@@ -544,3 +544,51 @@ main {
         max-width: none;
     }
 }
+
+/* Ficha de detalles del producto */
+.detalle-producto[hidden],
+#destacados[hidden] {
+    display: none;
+}
+
+.detalle-tarjeta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-top: 25px;
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid #D4E9EE;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(16, 45, 70, 0.08);
+}
+
+.detalle-imagen {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #DDF5F7, #EAF2FA);
+    font-size: 6rem;
+}
+
+.detalle-informacion h2 {
+    color: var(--azul-oceano);
+    margin: 12px 0;
+}
+
+.detalle-informacion > p {
+    line-height: 1.7;
+}
+
+@media (max-width: 650px) {
+    .detalle-tarjeta {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .detalle-imagen {
+        min-height: 200px;
+    }
+}
