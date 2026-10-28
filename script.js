@@ -399,7 +399,7 @@ function volverAProductos(actualizarURL = true) {
         behavior: "smooth"
     });
 }
-
+const botonVolver = document.querySelector("#volver-productos");
 
 botonVolver.addEventListener("click", function () {
     volverAProductos();
