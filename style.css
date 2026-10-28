@@ -647,3 +647,87 @@ main {
     margin-top: 24px;
 }
 
+/* ===== ORVÉLIS: tarjetas de productos ===== */
+
+#lista-productos {
+    gap: 24px;
+}
+
+.producto {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 22px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.producto:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.producto-icono {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border-radius: 14px;
+    font-size: 72px;
+    margin-bottom: 18px;
+}
+
+.producto-categoria {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.producto h3 {
+    font-size: 19px;
+    line-height: 1.4;
+    margin: 10px 0;
+    color: #172033;
+}
+
+.producto-descripcion {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.producto-precio {
+    color: #172554;
+    font-size: 23px;
+    font-weight: 800;
+    margin-top: 16px;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    #lista-productos {
+        gap: 14px;
+    }
+
+    .producto {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .producto-icono {
+        min-height: 110px;
+        font-size: 54px;
+    }
+
+    .producto h3 {
+        font-size: 16px;
+    }
+
+    .producto-precio {
+        font-size: 20px;
+    }
+}
+
