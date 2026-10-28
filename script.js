@@ -6,7 +6,6 @@ const resultadosBusqueda = document.querySelector("#resultados-busqueda");
 const contenedorBuscador = document.querySelector(".buscador-contenedor");
 const seccionDetalle = document.querySelector("#detalle-producto");
 const contenidoDetalle = document.querySelector("#contenido-detalle");
-const botonVolver = document.querySelector("#volver-productos");
 
 // Productos temporales para probar la tienda.
 // Después los cargaremos desde Supabase.
